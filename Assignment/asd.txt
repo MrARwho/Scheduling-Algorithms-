@@ -1,0 +1,17 @@
+if : (arrival time  + bursttime) of p1  > arrival time of p2
+    compare p2 bt < p1:
+        remaining time = p1(bt)-(currenttime-start)
+
+        queue = [[id,reamingtime]
+        sort this queue (everytime a process enters)
+
+        process wali array mn change hoga
+        process will repeat with changed BT
+
+        if : (arrival time  + bursttime) of p1  > arrival time of p2
+            compare p2 bt < p1:
+                remaining time = p1(bt)-(currenttime-start)
+                bt = remaining time (update it in the processess array) 
+
+
+
