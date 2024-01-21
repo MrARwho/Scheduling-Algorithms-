@@ -21,12 +21,13 @@ class Priority:
         exit_time = []
         s_time = 0
         sequence_of_process = []
-        for i in range(len(Process) - 1):
-            for j in range(len(Process) - 1):
-                if Process[j][1] > Process[j + 1][1]:
-                    a = Process[j][1]
-                    Process[j][1] = Process[j + 1][1]
-                    Process[j + 1][1] = a
+        Process.sort(key=lambda x: x[1])
+        # for i in range(len(Process) - 1):
+        #     for j in range(len(Process) - 1):
+        #         if Process[j][1] > Process[j + 1][1]:
+        #             a = Process[j][1]
+        #             Process[j][1] = Process[j + 1][1]
+        #             Process[j + 1][1] = a
         while 1:
             ready_queue = []
             normal_queue = []
@@ -106,7 +107,7 @@ class Priority:
         count = 0
         current = sequence_of_process[0]
         time=0
-        start=[0]
+        start=[Process[0][1]]
 
         for i in range(len(sequence_of_process)):
             if sequence_of_process[i] == current:

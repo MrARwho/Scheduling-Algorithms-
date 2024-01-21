@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 class RoundRobin:
-    def processData(self, no_of_processes):
+    def processdata(self, no_of_processes):
         process_data = []
         for i in range(no_of_processes):
             p = []
@@ -108,7 +108,7 @@ class RoundRobin:
 
         t_time = RoundRobin.calculateTurnaroundTime(self, process_data)
         w_time = RoundRobin.calculateWaitingTime(self, process_data)
-        RoundRobin.printData(self, process_data, t_time, w_time, executed_process)
+        RoundRobin.printData(self, process_data, t_time, w_time, executed_process,quantam_time)
 
     def calculateTurnaroundTime(self, process_data):
         total_turnaround_time = 0
@@ -128,7 +128,7 @@ class RoundRobin:
         average_waiting_time = total_waiting_time / len(process_data)
         return average_waiting_time
 
-    def printData(self, process_data, average_turnaround_time, average_waiting_time, executed_process):
+    def printData(self, process_data, average_turnaround_time, average_waiting_time, executed_process ,quantam_time):
 
 
         print(f'Average Turnaround Time: {average_turnaround_time}')
@@ -139,17 +139,17 @@ class RoundRobin:
         count = 0
         current = executed_process[0]
         time=0
-        start=[0]
+        start=[process_data[0][1]]
 
         for i in range(len(executed_process)):
             if executed_process[i] == current:
-                count += 1
-                time+=1
+                count += quantam_time
+                time+=quantam_time
             else:
                 result.append([current, count])
-                count = 1
+                count = quantam_time
                 start.append(time)
-                time+=1
+                time+=quantam_time
             current = executed_process[i]
 
         result.append([current, count])
@@ -182,6 +182,3 @@ class RoundRobin:
         plt.ylabel("Process ")
         plt.xlabel("Time")
         plt.show()
-
-RR = RoundRobin()
-RR.processData(3)

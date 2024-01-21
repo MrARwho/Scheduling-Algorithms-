@@ -8,7 +8,7 @@ class SJF:
         for i in range(no_of_processes):
             AT = int(input(f"enter Arrival time for {i + 1} : "))
             BT = int(input(f"enter Burst time for {i + 1} : "))
-            p = [i + 1, AT, BT,0,BT]
+            p = [i + 1, AT, BT, 0, BT]
 
         # for i in range(no_of_processes):
         #     temporary = []
@@ -30,12 +30,13 @@ class SJF:
         exit_time = []
         s_time = 0
         sequence_of_process = []
-        for i in range(len(process_data) - 1):
-            for j in range(len(process_data) - 1):
-                if process_data[j][1] > process_data[j + 1][1]:
-                    a = process_data[j][1]
-                    process_data[j][1] = process_data[j + 1][1]
-                    process_data[j + 1][1] = a
+        process_data.sort(key=lambda x: x[1])
+        # for i in range(len(process_data) - 1):
+        #     for j in range(len(process_data) - 1):
+        #         if process_data[j][1] > process_data[j + 1][1]:
+        #             a = process_data[j][1]
+        #             process_data[j][1] = process_data[j + 1][1]
+        #             process_data[j + 1][1] = a
 
         while 1:
             ready_queue = []
@@ -53,12 +54,13 @@ class SJF:
             if len(ready_queue) == 0 and len(normal_queue) == 0:
                 break
             if len(ready_queue) != 0:
-                for i in range(len(ready_queue) - 1):
-                    for j in range(len(ready_queue) - 1):
-                        if ready_queue[j][2] > ready_queue[j + 1][2]:
-                            a = ready_queue[j][2]
-                            ready_queue[j][2] = ready_queue[j + 1][2]
-                            ready_queue[j + 1][2] = a
+                ready_queue.sort(key=lambda x: x[2])
+                # for i in range(len(ready_queue) - 1):
+                #     for j in range(len(ready_queue) - 1):
+                #         if ready_queue[j][2] > ready_queue[j + 1][2]:
+                #             a = ready_queue[j][2]
+                #             ready_queue[j][2] = ready_queue[j + 1][2]
+                #             ready_queue[j + 1][2] = a
 
                 start_time.append(s_time)
                 s_time = s_time + 1
@@ -89,6 +91,7 @@ class SJF:
                     process_data[k].append(e_time)
         t_time = SJF.calculateTurnaroundTime(self, process_data)
         w_time = SJF.calculateWaitingTime(self, process_data)
+        print("seq : " , sequence_of_process)
         SJF.printData(self, process_data, t_time, w_time, sequence_of_process)
 
     def calculateTurnaroundTime(self, process_data):
@@ -142,8 +145,8 @@ class SJF:
         result = []
         count = 0
         current = sequence_of_process[0]
-        time=0
-        start=[0]
+        time = process_data[0][1]
+        start = [process_data[0][1]]
 
         for i in range(len(sequence_of_process)):
             if sequence_of_process[i] == current:
